@@ -1,0 +1,68 @@
+<div class="row chat-block">
+  <div class="block-header col-sm-12 col-md-12 col-lg-12">
+    <i class="fa fa-comment-o icon" aria-hidden="true"></i>
+    <span class="title">Let's chat together!</span>
+
+    <a href="/#/" class="pull-right">
+      <button class="btn btn-default">
+        <i class="fa fa-home" aria-hidden="true"></i>&nbsp;Home
+      </button>
+    </a>
+  </div>
+
+  <div class="block-add-username col-sm-12 col-md-12 col-lg-12" ng-if="!readyToChat">
+    <form class="form-inline">
+      <div class="form-group">
+        <input class="form-control" type="text" ng-model="username" enter-submit="createNewUser(username)" placeholder="Your username"/>
+      </div>
+      <button class="btn btn-primary" ng-click="createNewUser(username)">Create</button>
+    </form>
+  </div>
+
+  <div class="block-body col-sm-12 col-md-12 col-lg-12" ng-if="readyToChat">
+    <div class="col-sm-8 col-md-8 col-lg-8 chat-body">
+      <div class="chat-message row" ng-if="!messages.length">
+        <p class="welcome">Welcome to Chat App! This is a live chat application, so share it with your friends, or open it in multiple browsers tabs to try it out by yourself.</p>
+      </div>
+
+      <div class="chat-message" ng-if="messages.length">
+        <perfect-scrollbar class="scroller" scroll-glue wheel-propagation="true" wheel-speed="10" min-scrollbar-length="20">
+          <div ng-repeat="message in messages" class="row message-row" ng-class="{'me': message.from === username, 'other': message.from !== username}">
+            <div class="col-sm-2 col-md-2 col-lg-2 ">
+              <span class="message-user">{{message.from}}</span>
+            </div>
+            <div class="row col-sm-10 col-md-10 col-lg-10">
+              <div class="message-content col-sm-10 col-md-10 col-lg-10">{{message.content}}</div>
+              <div class="message-timestamp col-sm-2 col-md-2 col-lg-2">{{message.timestamp  | date:'medium'}}</div>
+            </div>
+          </div>
+        </perfect-scrollbar>
+      </div>
+
+      <div class="chat-text row">
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+          <i class="fa fa-commenting icon" aria-hidden="true"></i>
+        </div>
+        <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+          <textarea placeholder="Hit enter to send your messages..." ng-model="chatMessage.value" enter-submit="addMessage(chatMessage.value)" class="form-control" rows="3"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-4 col-md-4 col-lg-4 sidebar">
+      <div>
+        <p class="heading">Give people this link to chat with them:</p>
+        <p class="chat-link">{{ currentLink }}</p>
+      </div>
+
+      <div>
+        <p class="heading heading-member">Members</p>
+        <div ng-repeat="member in members">
+          <i class="fa fa-user" aria-hidden="true"></i>
+          <span class="member-name">{{ member.$value }}</span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
