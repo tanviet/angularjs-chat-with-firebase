@@ -15,6 +15,6 @@ describe('Directive: enterSubmit', function () {
   it('should make hidden element visible', inject(function ($compile) {
     element = angular.element('<enter-submit></enter-submit>');
     element = $compile(element)(scope);
-    expect(element.text()).toBe('this is the enterSubmit directive');
+    expect(element.text()).toBe('');
   }));
 });
