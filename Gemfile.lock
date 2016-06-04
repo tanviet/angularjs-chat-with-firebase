@@ -7,4 +7,4 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  compass
+  'chunky_png' 'compass-core' 'compass-import-once' 'rb-fsevent' 'rb-inotify' 'sass'
